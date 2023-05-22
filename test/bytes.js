@@ -1,7 +1,5 @@
-'use strict';
-
-var assert = require('assert');
-var bytes = require('../index.js');
+const assert = require('assert');
+const bytes = require('../index.js');
 
 describe('Test constructor', function(){
   it('Expect a function', function(){

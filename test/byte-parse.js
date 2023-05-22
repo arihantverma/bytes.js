@@ -1,7 +1,5 @@
-'use strict';
-
-var assert = require('assert');
-var bytes = require('..');
+const assert = require('assert');
+const bytes = require('..');
 
 describe('Test byte parse function', function(){
   it('Should return null if input is invalid', function(){
