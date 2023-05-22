@@ -2,30 +2,20 @@
  * bytes
  * Copyright(c) 2012-2014 TJ Holowaychuk
  * Copyright(c) 2015 Jed Watson
+ * Copyright(c) 2023 Arihant Verma
  * MIT Licensed
  */
 
-'use strict';
-
 /**
- * Module exports.
- * @public
- */
-
-module.exports = bytes;
-module.exports.format = format;
-module.exports.parse = parse;
-
-/**
- * Module variables.
+ * Module letiables.
  * @private
  */
 
-var formatThousandsRegExp = /\B(?=(\d{3})+(?!\d))/g;
+const formatThousandsRegExp = /\B(?=(\d{3})+(?!\d))/g;
 
-var formatDecimalsRegExp = /(?:\.0*|(\.[^0]+)0+)$/;
+const formatDecimalsRegExp = /(?:\.0*|(\.[^0]+)0+)$/;
 
-var map = {
+const map = {
   b:  1,
   kb: 1 << 10,
   mb: 1 << 20,
@@ -34,7 +24,7 @@ var map = {
   pb: Math.pow(1024, 5),
 };
 
-var parseRegExp = /^((-|\+)?(\d+(?:\.\d+)?)) *(kb|mb|gb|tb|pb)$/i;
+const parseRegExp = /^((-|\+)?(\d+(?:\.\d+)?)) *(kb|mb|gb|tb|pb)$/i;
 
 /**
  * Convert the given value in bytes into a string or parse to string to an integer in bytes.
@@ -51,7 +41,7 @@ var parseRegExp = /^((-|\+)?(\d+(?:\.\d+)?)) *(kb|mb|gb|tb|pb)$/i;
  * @returns {string|number|null}
  */
 
-function bytes(value, options) {
+export function bytes(value, options) {
   if (typeof value === 'string') {
     return parse(value);
   }
@@ -81,17 +71,17 @@ function bytes(value, options) {
  * @public
  */
 
-function format(value, options) {
+export function format(value, options) {
   if (!Number.isFinite(value)) {
     return null;
   }
 
-  var mag = Math.abs(value);
-  var thousandsSeparator = (options && options.thousandsSeparator) || '';
-  var unitSeparator = (options && options.unitSeparator) || '';
-  var decimalPlaces = (options && options.decimalPlaces !== undefined) ? options.decimalPlaces : 2;
-  var fixedDecimals = Boolean(options && options.fixedDecimals);
-  var unit = (options && options.unit) || '';
+  const mag = Math.abs(value);
+  const thousandsSeparator = (options && options.thousandsSeparator) || '';
+  const unitSeparator = (options && options.unitSeparator) || '';
+  const decimalPlaces = (options && options.decimalPlaces !== undefined) ? options.decimalPlaces : 2;
+  const fixedDecimals = Boolean(options && options.fixedDecimals);
+  let unit = (options && options.unit) || '';
 
   if (!unit || !map[unit.toLowerCase()]) {
     if (mag >= map.pb) {
@@ -109,8 +99,8 @@ function format(value, options) {
     }
   }
 
-  var val = value / map[unit.toLowerCase()];
-  var str = val.toFixed(decimalPlaces);
+  const val = value / map[unit.toLowerCase()];
+  let str = val.toFixed(decimalPlaces);
 
   if (!fixedDecimals) {
     str = str.replace(formatDecimalsRegExp, '$1');
@@ -138,7 +128,7 @@ function format(value, options) {
  * @public
  */
 
-function parse(val) {
+export function parse(val) {
   if (typeof val === 'number' && !isNaN(val)) {
     return val;
   }
@@ -148,9 +138,9 @@ function parse(val) {
   }
 
   // Test if the string passed is valid
-  var results = parseRegExp.exec(val);
-  var floatValue;
-  var unit = 'b';
+  const results = parseRegExp.exec(val);
+  let floatValue;
+  let unit = 'b';
 
   if (!results) {
     // Nothing could be extracted from the given string
@@ -168,3 +158,5 @@ function parse(val) {
 
   return Math.floor(map[unit] * floatValue);
 }
+
+
