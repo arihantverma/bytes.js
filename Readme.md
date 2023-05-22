@@ -1,9 +1,12 @@
 ## Purpose of Existence Of This Fork
 
 1. The purpose of existence of this package/fork is to be able to be consumable as umd and esm modules, since the [author is not interested in suporting those environment](https://github.com/visionmedia/bytes.js/issues/64#issuecomment-1557245891), which is their humble choice.
-2. Intention of this package is to be in sync with the original repo and just give umd and esm modules as outputs along with the [original cjs](https://github.com/visionmedia/bytes.js).
+2. Intention of this package is to be in sync with the original repo and just give umd and esm modules as outputs along with the existing cjs in the [original repo](https://github.com/visionmedia/bytes.js).
 
-> ⚠️ Only PRs related to being in sync with the original repo will be enterntained. If you want to make a functional change, please raise issues and PRs in the original repo.
+> ⚠️ Only PRs related to being in sync with the original repo will be enterntained. If you want to make a functional change, please raise issues and PRs in the [original repo](https://github.com/visionmedia/bytes.js).
+
+# ESM, CJS, UMD
+https://unpkg.com/browse/@arihantverma/bytes.js@3.1.2/dist/
 
 # Bytes utility
 
